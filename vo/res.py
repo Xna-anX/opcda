@@ -21,9 +21,6 @@ class QrQueryRes(BaseModel):
     message: Optional[str] = None
     type: Optional[str] = None
 
-class QrExportRes(BaseModel):
-    exportSuccess: bool = False
-
 class Product:
     #粗汽油干点
     tough: Optional[str] = None

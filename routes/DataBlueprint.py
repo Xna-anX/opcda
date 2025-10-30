@@ -3,9 +3,10 @@ from flask import Blueprint, request, jsonify
 from pydantic import ValidationError
 
 from services.DataViewService import DataViewService
+from vo.QrExport import QrExportReq, QrExportRes
 from vo.ResultEntity import ResultEntityMethod, ErrorCode
-from vo.req import ModelPredictReq, DataCollectReq, DataExportReq, QrQueryReq, QrExportReq
-from vo.res import ModelPredictRes, DataCollectRes, DataExportRes, QrQueryRes, QrExportRes
+from vo.req import ModelPredictReq, DataCollectReq, DataExportReq, QrQueryReq
+from vo.res import ModelPredictRes, DataCollectRes, DataExportRes, QrQueryRes
 
 dataViewBp = Blueprint('dataViewBp', __name__, url_prefix='/data')
 

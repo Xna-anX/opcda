@@ -5,9 +5,10 @@ from pydantic import ValidationError
 
 from models.DataView import db, DataView
 from vo import ResultEntity
+from vo.QrExport import QrExportRes, QrExportReq
 from vo.ResultEntity import ResultEntityMethod, ErrorCode
-from vo.req import DataCollectReq, ModelPredictReq, DataExportReq, QrQueryReq, QrExportReq
-from vo.res import QrQueryRes, QrExportRes
+from vo.req import DataCollectReq, ModelPredictReq, DataExportReq, QrQueryReq
+from vo.res import QrQueryRes
 
 logger = logging.getLogger()
 class DataViewService:
@@ -129,7 +130,7 @@ class DataViewService:
                     box_size=request.get("size"),
                     border=request.get("border"),
                 )
-                data = request.get("data")
+                data = request.to_qr_data()  # 返回过滤后的字典
                 qr.add_data(data)
                 qr.make(fit=True)
 

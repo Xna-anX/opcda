@@ -25,19 +25,6 @@ class QrQueryReq(BaseModel):
     message: Optional[str] = None
     type: Optional[str] = None
 
-class QrExportReq(BaseModel):
-    #二维码封存的数据
-    data: Optional[Any] = None
-    filename: Optional[str] = None
-    size: Optional[int] = None
-    border: Optional[int] = None
-    fill_color: Optional[str] = None
-    back_color: Optional[str] = None
-    # 添加这行配置, 允许嵌套的不是默认类型的存在
-    model_config = {
-        "arbitrary_types_allowed": True
-    }
-
 class Produce:
     #分馏塔顶温度
     temperature: Optional[str] = None
