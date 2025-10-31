@@ -140,9 +140,26 @@ class DataViewService:
                     os.makedirs(export_dir)
                     logger.info(f"[qr 导出] - 创建目录: {export_dir}")
 
+                def get_unique_filename(export_dir, filename):
+                    """
+                    生成唯一的文件名，如果存在相同文件名则自动递增数字
+                    """
+                    # 分离文件名和扩展名
+                    name, ext = os.path.splitext(filename)
+                    counter = 1
+                    new_filename = filename
+                    filepath = os.path.join(export_dir, new_filename)
+
+                    # 检查文件是否存在，如果存在则递增数字
+                    while os.path.exists(filepath):
+                        new_filename = f"{name}_{counter}{ext}"
+                        filepath = os.path.join(export_dir, new_filename)
+                        counter += 1
+
+                    return new_filename, filepath
                 # 设置文件路径到 export 目录
                 filename = request.get("filename")
-                filepath = os.path.join(export_dir, filename)
+                unique_filename, filepath = get_unique_filename(export_dir, filename)
 
                 # img可导出返回
                 img = qr.make_image(fill_color=request.get("fill_color"), back_color=request.get("back_color"))
